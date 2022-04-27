@@ -2,6 +2,7 @@ import {
   Dimensions,
   FlatList,
   Image,
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -27,7 +28,6 @@ const renderList = ({item}) => {
 };
 
 export default function Home({navigation}) {
-  let tabBarHeight = useBottomTabBarHeight();
   return (
     <View style={styles.Container}>
       <View style={styles.fixHeader} >
@@ -63,7 +63,8 @@ export default function Home({navigation}) {
             source={require('../../assets/icons/search.png')}
           />
           <TextInput
-            style={{width: '80%'}}
+            style={styles.searchIn}
+            numberOfLines={1}
             placeholder="Search for Products, Brands and More"
           />
           <Image
@@ -90,18 +91,20 @@ export default function Home({navigation}) {
           style={styles.loot}
           source={require('../../assets/images/loot.png')}
         />
+
         <View style={styles.carouselBox}>
           <SliderBox
             images={ImgList}
             autoplay={true}
             circleLoop
-            sliderBoxHeight={175}
+            sliderBoxHeight={180}
             resizeMode="contain"
             dotStyle={styles.carouselIndicator}
             dotColor="#000000"
             inactiveDotColor="#00000077"
           />
         </View>
+
         <View style={styles.discount}>
           <Text style={styles.discountHead}>{'Discounts for You'}</Text>
           <View style={styles.rowContain}>
@@ -142,6 +145,7 @@ export default function Home({navigation}) {
             </TouchableOpacity>
           </View>
         </View>
+        
       </ScrollView>
     </View>
   );
@@ -154,16 +158,16 @@ const styles = StyleSheet.create({
   },
   fixHeader: {
     backgroundColor: '#2874f0',
-    flexBasis: 140,
-    paddingTop: 40,
+    flexBasis: Platform.OS === 'ios'? 136 : 101,
+    paddingTop: Platform.OS === 'ios'? 40 : 10,
   },
   iconContainer: {
     flexDirection: 'row',
-    flexBasis: 55,
+    flexBasis: Platform.OS === 'ios'? 55 : 50,
   },
   iconLeftComponent: {
     flexDirection: 'row',
-    flexBasis: 280,
+    flexBasis: Platform.OS === 'ios' ? 290 : 320,
   },
   iconRightComponent: {
     flexDirection: 'row',
@@ -205,12 +209,20 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginHorizontal: 10,
   },
+  searchIn: {
+    width: screenWidth * 3 /4,
+    alignSelf: 'center',
+    height: 30,
+    padding: 1,
+  },
   voiceLogo: {
     height: 35,
     width: 35,
     alignSelf: 'center',
     borderTopRightRadius: 2,
     borderBottomRightRadius: 2,
+    position: 'absolute',
+    right: 0,
   },
   listBox: {
     backgroundColor: '#ffffff',
@@ -219,21 +231,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 6,
   },
   listIcon: {
-    height: 43,
-    width: 43,
+    height: 40,
+    width: 40,
+    resizeMode: 'contain',
   },
   listTitle: {
-    fontSize: 8,
+    fontSize: 10,
     fontWeight: '500',
+    color: '#000000',
   },
   scrollScreen: {},
   loot: {
     resizeMode: 'contain',
     width: screenWidth,
-    height: screenHeight / 5,
+    height: Platform.OS === 'ios' ? screenHeight / 5 : screenHeight / 4,
   },
   carouselBox: {
-    marginBottom: 2,
+    marginBottom: Platform.OS === 'android' ? 5 : 3,
     shadowColor: '#000000',
     shadowOffset: {
       width: 0,
@@ -252,8 +266,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   discountHead: {
+    color: '#000000',
     fontSize: 15,
-    fontWeight: '500',
+    fontFamily: 'Helvetica',
+    fontWeight: 'bold',
     width: '100%',
     margin: 5,
     marginVertical: 8,
@@ -272,16 +288,20 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   cardImg: {
-    height: 160,
-    width: 160,
+    height: screenWidth/2.4,
+    width: screenWidth/2.4,
     marginBottom: 8,
     resizeMode: 'contain',
   },
   cardText: {
     fontSize: 12,
+    fontFamily: 'Raleway',
+    fontWeight: '500',
+    color: '#000000',
   },
   discountRate: {
     color: '#337f37',
     fontWeight: '500',
+    fontFamily: 'Museo',
   },
 });

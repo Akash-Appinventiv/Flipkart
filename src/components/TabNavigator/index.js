@@ -1,24 +1,44 @@
-import {StyleSheet, Image, Text, View} from 'react-native';
+import {
+  StyleSheet,
+  Image,
+  Text,
+  View,
+  Dimensions,
+  Platform,
+} from 'react-native';
 import React from 'react';
-import {BottomTabBarHeightContext, createBottomTabNavigator, useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
+import {
+  BottomTabBarHeightContext,
+  createBottomTabNavigator,
+  useBottomTabBarHeight,
+} from '@react-navigation/bottom-tabs';
 import Home from '../Home';
 import Categories from '../Categories';
 import Notifications from '../Notifications';
 import Account from '../Account';
 import Cart from '../Cart';
 
+const {height: screenHeight} = Dimensions.get('window');
 
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigator() {
-  
   return (
-    <Tab.Navigator screenOptions={{
-      headerShown: false,
-      tabBarStyle:{
-        height: 68,
-        paddingTop: 3,
-      }
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: {
+          height: Platform.OS === 'ios' ? screenHeight / 12 : screenHeight / 15,
+          paddingTop: 3,
+          borderTopWidth: 1,
+        },
+        tabBarLabelStyle: {
+          fontWeight: '600',
+          marginBottom: Platform.OS === 'android' ? 10 : 0,
+        },
+        tabBarInactiveTintColor: '#3F3F3F',
+        tabBarActiveTintColor: '#027CD5',
+        tabBarHideOnKeyboard: true,
       }}>
       <Tab.Screen
         name="Home"
@@ -34,11 +54,8 @@ export default function TabNavigator() {
               }
             />
           ),
-          tabBarLabelStyle: {
-            fontWeight: '600',
-          },
-          tabBarInactiveTintColor: '#3F3F3F',
-          tabBarActiveTintColor: '#027CD5',
+          // tabBarInactiveTintColor: '#3F3F3F',
+          // tabBarActiveTintColor: '#027CD5',
         }}
       />
       <Tab.Screen
@@ -55,11 +72,8 @@ export default function TabNavigator() {
               }
             />
           ),
-          tabBarLabelStyle: {
-            fontWeight: '600',
-          },
-          tabBarInactiveTintColor: '#3F3F3F',
-          tabBarActiveTintColor: '#027CD5',
+          // tabBarInactiveTintColor: '#3F3F3F',
+          // tabBarActiveTintColor: '#027CD5',
         }}
       />
       <Tab.Screen
@@ -76,11 +90,8 @@ export default function TabNavigator() {
               }
             />
           ),
-          tabBarLabelStyle: {
-            fontWeight: '600',
-          },
-          tabBarInactiveTintColor: '#3F3F3F',
-          tabBarActiveTintColor: '#027CD5',
+          // tabBarInactiveTintColor: '#3F3F3F',
+          // tabBarActiveTintColor: '#027CD5',
         }}
       />
       <Tab.Screen
@@ -97,11 +108,8 @@ export default function TabNavigator() {
               }
             />
           ),
-          tabBarLabelStyle: {
-            fontWeight: '600',
-          },
-          tabBarInactiveTintColor: '#3F3F3F',
-          tabBarActiveTintColor: '#027CD5',
+          // tabBarInactiveTintColor: '#3F3F3F',
+          // tabBarActiveTintColor: '#027CD5',
         }}
       />
       <Tab.Screen
@@ -118,11 +126,8 @@ export default function TabNavigator() {
               }
             />
           ),
-          tabBarLabelStyle: {
-            fontWeight: '600',
-          },
-          tabBarInactiveTintColor: '#3F3F3F',
-          tabBarActiveTintColor: '#027CD5',
+          // tabBarInactiveTintColor: '#3F3F3F',
+          // tabBarActiveTintColor: '#027CD5',
         }}
       />
     </Tab.Navigator>
