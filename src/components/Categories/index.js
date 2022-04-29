@@ -5,6 +5,7 @@ import {
   Platform,
   ScrollView,
   StyleSheet,
+  TouchableOpacity,
   Text,
   View,
 } from 'react-native';
@@ -13,27 +14,26 @@ import allCategories from '../../utils/AllCategories';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
-const Table = ({item}) => {
-  return (
-    <View style={styles.categoryCard}>
-      <View style={styles.imgstyle}>
-        <Image style={styles.image} source={item.img} />
-      </View>
-      <Text style={styles.title}>{item.title}</Text>
-    </View>
-  );
-};
 
 export default function Categories({navigation}) {
+
+  const Table = ({item}) => {
+    return (
+      <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('List')} style={styles.categoryCard}>
+        <View style={styles.imgstyle}>
+          <Image style={styles.image} source={item.img} />
+        </View>
+        <Text style={styles.title}>{item.title}</Text>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View style={styles.parent}>
-      {Platform.OS === 'ios' ? <View style={styles.statusBar}></View> : null }
-
-    
-    <ScrollView style={styles.parent} showsVerticalScrollIndicator={false} bounces={false}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>{'All Categories'}</Text>
       </View>
+    <ScrollView style={styles.parent} showsVerticalScrollIndicator={false} bounces={false}>
 
       <View style={styles.list}>
         <FlatList
@@ -78,10 +78,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     zIndex: 1,
-    backgroundColor: '#2874f0',
+    backgroundColor: '#1669EF',
   },
   header: {
-    backgroundColor: '#2874f0',
+    backgroundColor: '#1669EF',
     height: Platform.OS === 'ios' ? screenHeight / 10 : screenHeight / 12,
     justifyContent: 'flex-end',
     padding: 15,

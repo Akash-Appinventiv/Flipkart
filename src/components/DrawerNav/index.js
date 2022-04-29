@@ -5,12 +5,14 @@ import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import StackNavigator from '../StackNavigator';
 import Notifications from '../Notifications';
 import DrawerContent from '../DrawerContent';
+import TabNavigator from '../TabNavigator';
+
 
 const Drawer = createDrawerNavigator();
 
-export default function App() {
+export default function DrawerNav() {
   return (
-    <NavigationContainer>
+
       <Drawer.Navigator
         useLegacyImplementation
         initialRouteName="Home"
@@ -33,6 +35,6 @@ export default function App() {
         }}
         />
       </Drawer.Navigator>
-    </NavigationContainer>
+
   );
 }

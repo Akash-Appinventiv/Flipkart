@@ -156,6 +156,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     fontFamily: 'Helvetica',
     justifyContent: 'center',
+    color: '#000000',
   },
   buttonWithSeperator: {
     alignItems: 'center',

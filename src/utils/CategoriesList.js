@@ -1,7 +1,8 @@
+
  const listData=[{
      title: 'All Categories',
      img:require( '../assets/icons/list.png'),
-     link: '../components/AllComponents',
+     link: 'Categories',
  },
  {
     title: 'Offer Zone',
