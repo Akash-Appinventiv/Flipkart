@@ -72,14 +72,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFF',
   },
-  statusBar: {
-    height: screenHeight/24,
-    width: screenWidth,
-    position: 'absolute',
-    top: 0,
-    zIndex: 1,
-    backgroundColor: '#1669EF',
-  },
   header: {
     backgroundColor: '#1669EF',
     height: Platform.OS === 'ios' ? screenHeight / 10 : screenHeight / 12,
