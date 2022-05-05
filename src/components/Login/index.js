@@ -1,4 +1,4 @@
-import {Dimensions, Image, Pressable, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {Dimensions, Image, Platform, Pressable, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 
 const {height, width} = Dimensions.get('window');
@@ -19,6 +19,8 @@ export default function Login({navigation}) {
       </View>
       <View style={styles.bodyContainer}>
         <View style={styles.body}>
+          <View>
+
           <Text style={styles.head}>
             {'Log in for the best experience'}
           </Text>
@@ -38,7 +40,7 @@ export default function Login({navigation}) {
             onChangeText={(value)=>{
               setPhNumber(value);
             }
-              }/>
+          }/>
           </View>
           <TouchableOpacity style={styles.rightButton}>
 
@@ -46,13 +48,14 @@ export default function Login({navigation}) {
             {'Use Email-ID'}
           </Text>
           </TouchableOpacity>
+          </View>
 
           <Pressable
           disabled={!checkNum}
           onPress={()=>navigation.replace('Drawer')}
           style={({pressed}) => [
             {
-              backgroundColor: checkNum
+              backgroundColor: !checkNum
                 ? '#BBBBBB'
                 : '#FB5908' && (pressed ? '#FC651A' : '#FB5908'),
             },
@@ -102,9 +105,10 @@ const styles = StyleSheet.create({
   },
   body: {
     backgroundColor: '#FFFFFF',
-    height: height * 12.5 / 15,
+    height: Platform.OS === 'android' ? height * 13 / 15 : height * 12.5 /15,
     marginTop: 10,
     paddingHorizontal: width/25,
+    justifyContent: 'space-between',
 
   },
   head: {
@@ -172,8 +176,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 2,
     margin: 5,
-    position: 'absolute',
-    bottom: 10,
+    // position: 'absolute',
+    // bottom: 5,
     width: width*9.2/10,
     alignSelf: 'center',
   },
