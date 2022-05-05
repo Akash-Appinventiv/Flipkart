@@ -1,4 +1,4 @@
-import {Dimensions, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Dimensions, Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 
 const {height, width} = Dimensions.get('window');
@@ -9,13 +9,39 @@ export default function Login({navigation}) {
       <View style={styles.parent}>
       <View style={styles.header}>
         {/* <Text style={styles.headerTitle}>{'Choose Language'}</Text> */}
-        <Image style={styles.headLogo} source={require('../../assets/images/flipkart-logo.png')} />
+        <Image style={styles.headLogo} source={require('../../assets/images/Login-logo.png')} />
       </View>
-      <TouchableOpacity onPress={()=>navigation.replace('Drawer')}>
+      <View style={styles.bodyContainer}>
+        <View style={styles.body}>
+          <Text style={styles.head}>
+            {'Log in for the best experience'}
+          </Text>
+          <Text style={styles.description}>
+            {'Enter your phone number to continue'}
+          </Text>
+
+          <View style={styles.inputBox}>
+            <Text style={styles.numberHead}>{'Phone Number'}</Text>
+            <TouchableOpacity activeOpacity={0.8} style={styles.countryCode}>
+            <Text>
+              {'+91'}
+            </Text>
+            <Image style={styles.downArrow} source={require('../../assets/icons/down.png')} />
+            </TouchableOpacity>
+            <TextInput  style={styles.input} keyboardType={'numeric'}/>
+          </View>
+
+          <Text>
+            {'Use Email-ID'}
+          </Text>
+
+      {/* <TouchableOpacity onPress={()=>navigation.replace('Drawer')}>
           <Text>
               {'Next Page'}
           </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
+        </View>
+      </View>
       </View>
     </SafeAreaView>
   );
@@ -23,26 +49,91 @@ export default function Login({navigation}) {
 
 const styles = StyleSheet.create({
   parentContainer: {
-    backgroundColor: '#1669EF',
+    backgroundColor: '#2673F0',
   },
   parent: {
-    backgroundColor: '#0f0',
+    backgroundColor: '#2673F0',
   },
   header: {
-    backgroundColor: '#1669EF',
+    backgroundColor: '#2673F0',
     height: height / 15,
-    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: 15,
     marginBottom: 5,
   },
   headLogo: {
       height: 50,
       width: 100,
+      resizeMode: 'contain',
   },
   headerTitle: {
     color: '#FFFFFF',
     fontSize: 18,
     fontFamily: 'Raleway',
     fontWeight: '600',
+  },
+  bodyContainer: {
+    backgroundColor: '#FEFEFE',
+    height: height * 14 / 15,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+  },
+  body: {
+    backgroundColor: '#FFFFFF',
+    height: height * 14 / 15,
+    marginTop: 10,
+    paddingHorizontal: width/25,
+  },
+  head: {
+    fontWeight: '600',
+    fontFamily: 'Raleway',
+    marginVertical: height/90,
+    letterSpacing: 0.3,
+  },
+  description: {
+    fontSize: 13,
+    color: '#666666',
+    marginBottom: height/90,
+  },
+  inputBox: {
+    height: height/18,
+    borderWidth: 2,
+    borderRadius: 5,
+    borderColor: '#1669EF',
+    marginVertical: height/60,
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 7,
+  },
+  numberHead: {
+    color: '#1669EF',
+    fontSize: 11,
+    paddingHorizontal: 3,
+    backgroundColor: '#FFFFFF',
+    width: 84,
+    position: 'absolute',
+    top: -7,
+    left: 5,
+  },
+  countryCode: {
+    flexDirection: 'row',
+    height: height/20,
+    alignItems: 'center',
+    width: width/10,
+    justifyContent: 'space-between',
+  },
+  downArrow:{
+    height: height/100,
+    width: height/100,
+    resizeMode: 'contain',
+  },
+  input: {
+    // borderWidth: 1,
+    width: width*3/4,
+    height: height/25,
+    padding: 5,
+    fontSize: 15,
   },
 });
