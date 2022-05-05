@@ -1,14 +1,20 @@
-import {Dimensions, Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {Dimensions, Image, Pressable, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 
 const {height, width} = Dimensions.get('window');
 
 export default function Login({navigation}) {
+  const [phNumber, setPhNumber] = React.useState('');
+
+  const checkNum =()=>{
+    const reg = /^\d{10}$/
+    return reg.test(phNumber)
+  }
+
   return (
     <SafeAreaView style={styles.parentContainer}>
       <View style={styles.parent}>
       <View style={styles.header}>
-        {/* <Text style={styles.headerTitle}>{'Choose Language'}</Text> */}
         <Image style={styles.headLogo} source={require('../../assets/images/Login-logo.png')} />
       </View>
       <View style={styles.bodyContainer}>
@@ -28,18 +34,32 @@ export default function Login({navigation}) {
             </Text>
             <Image style={styles.downArrow} source={require('../../assets/icons/down.png')} />
             </TouchableOpacity>
-            <TextInput  style={styles.input} keyboardType={'numeric'}/>
+            <TextInput name={phNumber} style={styles.input} keyboardType={'numeric'} 
+            onChangeText={(value)=>{
+              setPhNumber(value);
+            }
+              }/>
           </View>
+          <TouchableOpacity style={styles.rightButton}>
 
-          <Text>
+          <Text style={styles.rightLink}>
             {'Use Email-ID'}
           </Text>
+          </TouchableOpacity>
 
-      {/* <TouchableOpacity onPress={()=>navigation.replace('Drawer')}>
-          <Text>
-              {'Next Page'}
-          </Text>
-      </TouchableOpacity> */}
+          <Pressable
+          disabled={!checkNum}
+          onPress={()=>navigation.replace('Drawer')}
+          style={({pressed}) => [
+            {
+              backgroundColor: checkNum
+                ? '#BBBBBB'
+                : '#FB5908' && (pressed ? '#FC651A' : '#FB5908'),
+            },
+            styles.button,
+          ]}>
+          <Text style={styles.nextpage}>{'CONTINUE'}</Text>
+        </Pressable>
         </View>
       </View>
       </View>
@@ -82,9 +102,10 @@ const styles = StyleSheet.create({
   },
   body: {
     backgroundColor: '#FFFFFF',
-    height: height * 14 / 15,
+    height: height * 12.5 / 15,
     marginTop: 10,
     paddingHorizontal: width/25,
+
   },
   head: {
     fontWeight: '600',
@@ -135,5 +156,29 @@ const styles = StyleSheet.create({
     height: height/25,
     padding: 5,
     fontSize: 15,
+  },
+  rightButton: {
+    width: width/4,
+    alignSelf: 'flex-end',
+  },
+  rightLink: {
+    textAlign: 'right',
+    fontFamily: 'Raleway',
+    fontWeight: '600',
+    color: '#1669EF',
+  },
+  button: {
+    padding: 15,
+    alignItems: 'center',
+    borderRadius: 2,
+    margin: 5,
+    position: 'absolute',
+    bottom: 10,
+    width: width*9.2/10,
+    alignSelf: 'center',
+  },
+  nextpage: {
+    color: '#FFFFFF',
+    fontWeight: '700',
   },
 });

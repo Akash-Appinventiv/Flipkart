@@ -29,7 +29,7 @@ export default function Language({navigation}) {
       </ScrollView>
         <Pressable
           disabled={isInactive}
-          onPress={()=>navigation.replace('Drawer')}
+          onPress={()=>navigation.replace('Login')}
           style={({pressed}) => [
             {
               backgroundColor: isInactive
